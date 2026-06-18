@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 const ArticleEditor = dynamic(
   () => import("@/components/blog/ArticleEditor"),
@@ -20,11 +21,15 @@ export default function EditPostPage() {
     excerpt: "",
     content: "",
     tags: "",
+    category: "LAW",
     published: false,
+    featuredImage: "",
   });
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState("");
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const featuredImageRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetch(`/api/blog/${id}`)
@@ -35,11 +40,30 @@ export default function EditPostPage() {
           excerpt: post.excerpt ?? "",
           content: post.content,
           tags: post.tags.map((t: { name: string }) => t.name).join(", "),
+          category: post.category ?? "LAW",
           published: post.published,
+          featuredImage: post.featuredImage ?? "",
         });
         setFetching(false);
       });
   }, [id]);
+
+  const handleFeaturedImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingImage(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await fetch("/api/upload", { method: "POST", body: formData });
+    if (res.ok) {
+      const { url } = await res.json();
+      setForm((f) => ({ ...f, featuredImage: url }));
+    } else {
+      alert("Gagal upload gambar");
+    }
+    setUploadingImage(false);
+    e.target.value = "";
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,6 +109,7 @@ export default function EditPostPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Judul */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">Judul *</label>
           <input
@@ -96,6 +121,87 @@ export default function EditPostPage() {
           />
         </div>
 
+        {/* Kategori */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Kategori *
+          </label>
+          <div className="flex gap-3">
+            {[
+              { value: "LAW", label: "⚖️ Hukum", desc: "Artikel hukum, kebijakan, analisis yuridis" },
+              { value: "CULTURE", label: "🎭 Budaya", desc: "Seni, tradisi Bali, kebudayaan" },
+            ].map((cat) => (
+              <button
+                key={cat.value}
+                type="button"
+                onClick={() => setForm({ ...form, category: cat.value })}
+                className={`flex-1 border-2 rounded-lg px-4 py-3 text-left transition-all ${
+                  form.category === cat.value
+                    ? "border-brand-500 bg-brand-50"
+                    : "border-gray-200 hover:border-gray-300"
+                }`}
+              >
+                <p className="font-semibold text-sm">{cat.label}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{cat.desc}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Featured Image */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Featured Image
+          </label>
+          {form.featuredImage ? (
+            <div className="relative">
+              <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-gray-100">
+                <Image
+                  src={form.featuredImage}
+                  alt="Featured image"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => setForm({ ...form, featuredImage: "" })}
+                className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-xs hover:bg-red-600 transition-colors"
+              >
+                ✕
+              </button>
+              <button
+                type="button"
+                onClick={() => featuredImageRef.current?.click()}
+                className="absolute bottom-2 right-2 bg-black/60 text-white rounded px-3 py-1 text-xs hover:bg-black/80 transition-colors"
+              >
+                Ganti
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => featuredImageRef.current?.click()}
+              disabled={uploadingImage}
+              className="w-full border-2 border-dashed border-gray-300 rounded-lg px-6 py-10 text-center hover:border-brand-400 transition-colors disabled:opacity-50"
+            >
+              <p className="text-2xl mb-2">🖼</p>
+              <p className="text-sm font-medium text-gray-600">
+                {uploadingImage ? "Mengupload…" : "Klik untuk upload gambar"}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">JPG, PNG, WebP · Maks. 5MB</p>
+            </button>
+          )}
+          <input
+            ref={featuredImageRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFeaturedImageUpload}
+          />
+        </div>
+
+        {/* Ringkasan */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">Ringkasan</label>
           <textarea
@@ -106,6 +212,7 @@ export default function EditPostPage() {
           />
         </div>
 
+        {/* Konten */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">Konten *</label>
           <ArticleEditor
@@ -114,6 +221,7 @@ export default function EditPostPage() {
           />
         </div>
 
+        {/* Tags */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">Tags</label>
           <input
@@ -121,10 +229,11 @@ export default function EditPostPage() {
             value={form.tags}
             onChange={(e) => setForm({ ...form, tags: e.target.value })}
             className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
-            placeholder="Contoh: Menulis, Tips (pisahkan dengan koma)"
+            placeholder="Contoh: Kontrak, Notariat, Topeng (pisahkan dengan koma)"
           />
         </div>
 
+        {/* Publish toggle */}
         <div className="flex items-center gap-3">
           <input
             type="checkbox"

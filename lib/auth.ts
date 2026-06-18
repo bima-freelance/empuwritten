@@ -1,6 +1,5 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -18,13 +17,9 @@ export const authOptions: NextAuthOptions = {
 
         if (!adminEmail || !adminPassword) return null;
 
-        if (credentials.email !== adminEmail) return null;
-
-        // Jika password disimpan sebagai hash bcrypt
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          adminPassword
-        );
+        const isValid =
+          credentials.email === adminEmail &&
+          credentials.password === adminPassword;
 
         if (!isValid) return null;
 

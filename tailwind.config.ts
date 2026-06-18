@@ -13,6 +13,18 @@ const config: Config = {
         serif: ["var(--font-playfair)", "serif"],
       },
       colors: {
+        brand: {
+          50:  "#f0f4ff",
+          100: "#dce7fd",
+          200: "#b9d0fb",
+          300: "#86aff8",
+          400: "#5585f2",
+          500: "#3461e8",
+          600: "#2148d4",
+          700: "#1b38b0",
+          800: "#1c3090",
+          900: "#1b2d78",
+        },
         gold: {
           50:  "#fdf8ee",
           100: "#f9edd0",

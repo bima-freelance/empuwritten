@@ -163,17 +163,17 @@ export default function ContactPage() {
                   {[
                     {
                       label: "Email",
-                      value: "nama@email.com",
-                      href: "mailto:nama@email.com",
+                      value: "bagusdananjaya1@gmail.com",
+                      href: "mailto:bagusdananjaya1@gmail.com",
                     },
                     {
                       label: "Telepon",
-                      value: "+62 812-XXXX-XXXX",
-                      href: "tel:+628120000000",
+                      value: "+6282-337-331-331",
+                      href: "tel:+6282337331331",
                     },
                     {
                       label: "Kantor",
-                      value: "[Nama Kantor/Institusi]\n[Alamat Jalan]\n[Kota], Bali",
+                      value: "Pagrahān Lor Kusara\nJl. Raya Tegallalang, Tegallalang, Kec. Tegallalang, Bali 80561\nKabupaten Gianyar, Bali",
                       href: null,
                     },
                   ].map((info) => (
@@ -223,9 +223,9 @@ export default function ContactPage() {
                 <div className="space-y-3">
                   {/* [EDIT] Ganti href dengan URL akun Anda */}
                   {[
-                    { platform: "Instagram", handle: "@[username_anda]", href: "#" },
-                    { platform: "LinkedIn", handle: "Dr. [Nama Anda]", href: "#" },
-                    { platform: "YouTube", handle: "[Channel Anda]", href: "#" },
+                    { platform: "Instagram", handle: "@tubagusgallery", href: "https://www.instagram.com/tubagusgallery" },
+                    { platform: "Tiktok", handle: "@tubagusgallery", href: "https://www.tiktok.com/@tubagusgallery" },
+                    { platform: "Facebook", handle: "Tubagus Dananjaya", href: "https://www.facebook.com/tubagus.dananjaya.9" },
                   ].map((s) => (
                     <a
                       key={s.platform}

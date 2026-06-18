@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { generateSlug } from "@/lib/utils";
-
 interface Params {
   params: { id: string };
 }
@@ -28,7 +27,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const { title, excerpt, content, published, tags } = body;
+  const { title, excerpt, content, published, tags, featuredImage, category } = body;
 
   const existing = await prisma.post.findUnique({ where: { id: Number(params.id) } });
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -36,7 +35,6 @@ export async function PUT(req: NextRequest, { params }: Params) {
   const wasPublished = existing.published;
   const newSlug = title ? generateSlug(title) : existing.slug;
 
-  // Upsert tags
   const tagConnections = tags?.length
     ? await Promise.all(
         (tags as string[]).map((name: string) =>
@@ -56,9 +54,10 @@ export async function PUT(req: NextRequest, { params }: Params) {
       slug: newSlug,
       excerpt: excerpt ?? existing.excerpt,
       content: content ?? existing.content,
+      featuredImage: featuredImage !== undefined ? (featuredImage || null) : existing.featuredImage,
+      category: (category === "CULTURE" ? "CULTURE" : category === "LAW" ? "LAW" : existing.category) as "LAW" | "CULTURE",
       published: published ?? existing.published,
-      publishedAt:
-        published && !wasPublished ? new Date() : existing.publishedAt,
+      publishedAt: published && !wasPublished ? new Date() : existing.publishedAt,
       tags: {
         set: tagConnections.map((t) => ({ id: t.id })),
       },

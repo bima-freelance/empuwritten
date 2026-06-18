@@ -1,70 +1,137 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
-// [EDIT] Ganti title dan description sesuai nama Anda
 export const metadata: Metadata = {
   title: "Profil",
-  description: "Profil Dr. [Nama Anda] — Doktor Hukum dan Seniman Topeng Bali.",
+  description: "Profil Dr. Putu Bagus Dananjaya, S.H., M.Kn — Doktor Hukum dan Seniman Topeng Bali.",
 };
 
-// [EDIT] Ganti dengan keahlian hukum Anda beserta persentase
+// Bidang riset dari Google Scholar
 const skillsHukum = [
-  { label: "Hukum Adat & Tradisi Bali", level: 95 },
-  { label: "[Bidang Hukum Spesialisasi 2]", level: 90 },
-  { label: "[Bidang Hukum Spesialisasi 3]", level: 85 },
-  { label: "Penulisan Karya Ilmiah", level: 92 },
+  { label: "Hukum Kontrak (Contract Law)", level: 95 },
+  { label: "Hukum Kenotariatan (Notary Law)", level: 95 },
+  { label: "Hukum Perdata (Privat Law)", level: 90 },
+  { label: "Teori Hukum (Theory of Law)", level: 88 },
+  { label: "Filsafat Hukum (Philosophy of Law)", level: 85 },
 ];
 
-// [EDIT] Ganti dengan keahlian seni Anda
 const skillsSeni = [
-  { label: "Tari Topeng Bali", level: 95 },
-  { label: "Ukiran Topeng", level: 88 },
-  { label: "Koreografi & Repertoar", level: 85 },
-  { label: "Transmisi & Pengajaran", level: 90 },
+  { label: "Topeng Bali", level: 95 },
+  { label: "calonarang", level: 92 },
+  { label: "Mewirama & Mekidung", level: 92 },
+  { label: "Menulis Tulisan Tradisi", level: 85 },
 ];
 
-// [EDIT] Ganti dengan riwayat pendidikan Anda
+// Publikasi dari Google Scholar (36 kutipan, h-index 3)
+const publikasi = [
+  {
+    tahun: "2024",
+    judul: "Dasar-Dasar Hukum: Pedoman Hukum di Indonesia",
+    penerbit: "PT. Sonpedia Publishing Indonesia",
+    kutipan: 19,
+  },
+  {
+    tahun: "2022",
+    judul: "Mekanisme Citizen Lawsuit dalam Perspektif Sistem Peradilan Di Indonesia",
+    penerbit: "Jurnal Hukum Saraswati (JHS) 4 (1), 15–30",
+    kutipan: 6,
+  },
+  {
+    tahun: "2024",
+    judul: "Penegakan Hukum Pemilu di Indonesia: Tantangan dan Prospek Keberlanjutan Demokrasi",
+    penerbit: "PT. Sonpedia Publishing Indonesia",
+    kutipan: 5,
+  },
+  {
+    tahun: "2020",
+    judul: "Perlindungan Hukum Terhadap Hak Cipta Geguritan Bali Di Indonesia",
+    penerbit: "Acta Comitas 5 (3)",
+    kutipan: 3,
+  },
+  {
+    tahun: "2024",
+    judul: "Perlindungan Hukum Terhadap Profesi Advokat dalam Pencucian Uang",
+    penerbit: "Ranah Research: Journal of Multidisciplinary Research and Development",
+    kutipan: 2,
+  },
+  {
+    tahun: "2024",
+    judul: "Hukum Perancangan Kontrak",
+    penerbit: "PT. Sonpedia Publishing Indonesia",
+    kutipan: 0,
+  },
+  {
+    tahun: "2025",
+    judul: "Indonesian Advocates' Success Fee Agreements: Policies and Challenges",
+    penerbit: "Journal of Sustainable Development and Regulatory Issues (JSDERI) 3 (3)",
+    kutipan: 0,
+  },
+];
+
 const pendidikan = [
   {
-    tahun: "[Tahun]",
-    gelar: "Doktor (Ph.D.) Ilmu Hukum",
-    institusi: "[Nama Universitas]",
-    keterangan: "Disertasi: [Judul Disertasi Anda]",
+    tahun: "2022–kini",
+    gelar: "Doktor (S3) Ilmu Hukum",
+    institusi: "Universitas Tarumanegara, Jakarta",
+    keterangan: "Program Doktoral Ilmu Hukum",
   },
   {
-    tahun: "[Tahun]",
-    gelar: "Magister Hukum (M.H.)",
-    institusi: "[Nama Universitas]",
-    keterangan: "[Bidang konsentrasi/spesialisasi]",
+    tahun: "2019–2022",
+    gelar: "Magister Kenotariatan (M.Kn)",
+    institusi: "Universitas Udayana, Bali",
+    keterangan: "Program Studi Magister Kenotariatan",
   },
   {
-    tahun: "[Tahun]",
+    tahun: "2014–2018",
     gelar: "Sarjana Hukum (S.H.)",
-    institusi: "[Nama Universitas]",
-    keterangan: "[Prestasi, misal: Cumlaude]",
+    institusi: "Fakultas Hukum Universitas Udayana",
+    keterangan: "Bagus Fakultas Hukum UNUD 2016 · Bagus Foto Genik UNUD 2016",
+  },
+  {
+    tahun: "2011–2014",
+    gelar: "SMA",
+    institusi: "SMAN 1 Ubud",
+    keterangan: "Ketua Umum OSIS · Juara 1 & 2 Mewirama Se-Kabupaten & Se-Provinsi Bali 2014",
   },
 ];
 
-// [EDIT] Ganti dengan pengalaman kerja dan seni Anda
-const pengalaman = [
+const organisasi = [
   {
-    tahun: "[Tahun] – Sekarang",
-    jabatan: "[Jabatan, misal: Dosen / Pengacara / Hakim]",
-    institusi: "[Nama Institusi/Lembaga]",
-    keterangan: "[Deskripsi singkat peran Anda]",
+    tahun: "2025–2030",
+    jabatan: "Petajuh (Wakil Ketua)",
+    institusi: "Pasikian Yowana Provinsi Bali",
+    keterangan: "Organisasi kepemudaan Hindu Bali tingkat provinsi.",
   },
   {
-    tahun: "[Tahun] – [Tahun]",
-    jabatan: "[Jabatan sebelumnya]",
-    institusi: "[Institusi sebelumnya]",
-    keterangan: "[Deskripsi]",
+    tahun: "Aktif",
+    jabatan: "Court Monitoring",
+    institusi: "Komisi Pemberantasan Korupsi (KPK) Provinsi Bali",
+    keterangan: "Pemantauan persidangan dalam rangka pemberantasan korupsi.",
   },
   {
-    tahun: "[Tahun] – Sekarang",
-    jabatan: "Seniman Topeng Bali",
-    institusi: "[Sanggar/Padepokan/Komunitas Seni]",
-    keterangan: "Aktif pentas, mengajar, dan melestarikan tradisi Topeng Bali.",
+    tahun: "Aktif",
+    jabatan: "Ketua Biro Organisasi",
+    institusi: "Perhimpunan Mahasiswa Hukum Indonesia Cabang Bali",
+    keterangan: "Koordinasi organisasi mahasiswa hukum se-Bali.",
   },
+  {
+    tahun: "Aktif",
+    jabatan: "Ketua",
+    institusi: "Forum Intelektual Muda Hindu Dharma Kab. Gianyar",
+    keterangan: "Mendorong kajian intelektual berbasis nilai Hindu Dharma.",
+  },
+];
+
+const prestasi = [
+  { tahun: "2024", label: "Juara 2 Lomba Topeng Pengerawos Se-Bali — Institut Seni Indonesia Bali" },
+  { tahun: "2016", label: "Juara 1 Internal Mooting Peradilan Semu — Fakultas Hukum UNUD" },
+  { tahun: "2016", label: "Bagus Fakultas Hukum & Bagus Foto Genik — Universitas Udayana" },
+  { tahun: "2014", label: "Juara 2 Mewirama Se-Provinsi Bali" },
+  { tahun: "2014", label: "Juara 1 Mewirama Se-Kabupaten Gianyar" },
+  { tahun: "2011", label: "Juara 3 Mekidung Se-Kabupaten Gianyar" },
+  { tahun: "2008", label: "Juara 3 Lomba Tari Kebyar Duduk — Kabupaten Gianyar" },
+  { tahun: "2007", label: "Juara 3 Lomba Baris Tunggal Se-Kabupaten Gianyar" },
 ];
 
 export default function AboutPage() {
@@ -78,9 +145,8 @@ export default function AboutPage() {
             <span className="w-10 h-px bg-gold-500" />
             Profil
           </p>
-          {/* [EDIT] Ganti dengan nama lengkap dan gelar Anda */}
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
-            Dr. [Nama Lengkap Anda], S.H., M.H.
+            Dr. Putu Bagus Dananjaya, S.H., M.Kn
           </h1>
           <p className="text-gray-400 text-sm">
             <Link href="/" className="hover:text-gold-400 transition-colors">Beranda</Link>
@@ -96,29 +162,23 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-16 items-start">
             {/* Image */}
             <div className="relative">
-              <div className="aspect-[3/4] bg-dark-100 overflow-hidden max-w-sm">
-                {/*
-                  [EDIT] Ganti dengan foto resmi Anda.
-                  Simpan foto di: public/images/foto-profil.jpg
-                  Lalu ganti div di bawah dengan:
-                  <Image src="/images/foto-profil.jpg" fill className="object-cover object-top" alt="Dr. [Nama]" />
-                */}
-                <div className="w-full h-full bg-gradient-to-br from-dark-700 to-dark-900 flex flex-col items-center justify-center gap-3 text-white/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-24 h-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  <p className="text-xs tracking-widest uppercase font-sans">Foto Profil</p>
-                </div>
+              <div className="aspect-[3/4] bg-dark-100 overflow-hidden max-w-sm relative">
+                <Image
+                  src="/images/profile.png"
+                  fill
+                  className="object-cover object-top"
+                  alt="Dr. Putu Bagus Dananjaya"
+                  sizes="(max-width: 768px) 100vw, 400px"
+                />
               </div>
               <div className="absolute -bottom-6 -right-6 w-36 h-36 bg-gold-600 -z-10" />
 
               {/* Stat cards */}
               <div className="grid grid-cols-3 gap-2 mt-10">
                 {[
-                  /* [EDIT] Ganti angka dan label */
-                  { num: "20+", label: "Tahun Karir" },
-                  { num: "500+", label: "Karya Topeng" },
-                  { num: "50+", label: "Publikasi" },
+                  { num: "36", label: "Dikutip" },
+                  { num: "13+", label: "Publikasi" },
+                  { num: "h=3", label: "H-Index" },
                 ].map((h) => (
                   <div key={h.num} className="bg-dark-800 p-4 text-center">
                     <p className="font-serif text-xl font-bold text-gold-400">{h.num}</p>
@@ -132,44 +192,44 @@ export default function AboutPage() {
             <div>
               <p className="section-label">Biografi</p>
               <h2 className="section-heading mb-2">
-                {/* [EDIT] Ganti dengan nama panggilan / tagline */}
                 Praktisi Hukum &{" "}
-                <span className="text-gold-600 italic">Seniman Budaya</span>
+                <span className="text-gold-600 italic">Seniman Budaya Bali</span>
               </h2>
               <div className="gold-divider" />
 
-              {/* [EDIT] Ganti semua paragraf bio dengan narasi Anda */}
               <div className="space-y-4 text-dark-500 leading-relaxed mb-8">
                 <p>
-                  [Paragraf 1: Perkenalkan diri Anda secara singkat. Siapa Anda,
-                  dari mana asal Anda, dan apa yang membuat perjalanan hidup Anda
-                  unik sebagai seorang Doktor Hukum sekaligus Seniman Topeng Bali.]
+                  Putu Bagus Dananjaya lahir di Tegallalang, Gianyar, Bali pada 10 Juni 1996.
+                  Ia menempuh pendidikan hukum hingga jenjang doktoral — dari Sarjana dan
+                  Magister Kenotariatan di Universitas Udayana, hingga Program Doktoral di
+                  Universitas Tarumanegara Jakarta.
                 </p>
                 <p>
-                  [Paragraf 2: Ceritakan perjalanan akademis hukum Anda —
-                  kapan mulai tertarik dengan hukum, di mana kuliah, apa fokus
-                  penelitian doktoral Anda, dan apa kontribusi Anda di bidang hukum.]
+                  Sebagai praktisi hukum, ia aktif dalam gerakan pemberantasan korupsi melalui
+                  Court Monitoring KPK Provinsi Bali, serta berkiprah di organisasi mahasiswa
+                  hukum nasional. Kepemimpinannya tecermin dari berbagai jabatan strategis yang
+                  ia emban sejak masa sekolah hingga kini.
                 </p>
                 <p>
-                  [Paragraf 3: Ceritakan perjalanan Anda dalam seni Topeng Bali —
-                  kapan mulai belajar, siapa guru Anda, jenis topeng yang Anda
-                  dalami, dan apa visi Anda dalam pelestarian seni ini.]
+                  Di sisi lain, ia adalah seniman Bali yang berprestasi — meraih berbagai juara
+                  dalam bidang tari, mewirama, dan topeng. Baginya, hukum dan seni bukan dua
+                  dunia yang berseberangan, melainkan dua sayap yang mengangkat peradaban.
                 </p>
               </div>
 
               {/* Identitas */}
               <div className="bg-gray-50 border border-gray-100 p-6 mb-8 space-y-3">
                 {[
-                  /* [EDIT] Ganti semua value dengan data Anda */
-                  { label: "Nama", value: "Dr. [Nama Lengkap], S.H., M.H." },
-                  { label: "Profesi", value: "Doktor Hukum · Seniman Topeng Bali" },
-                  { label: "Institusi", value: "[Universitas / Lembaga Anda]" },
-                  { label: "Lokasi", value: "[Kota], Bali, Indonesia" },
-                  { label: "Email", value: "nama@email.com" },
+                  { label: "Nama", value: "Dr. Putu Bagus Dananjaya, S.H., M.Kn" },
+                  { label: "TTL", value: "Tegallalang, 10 Juni 1996" },
+                  { label: "Profesi", value: "Dosen FH Unmas Denpasar · Seniman Topeng Bali" },
+                  { label: "Lokasi", value: "Tegallalang, Gianyar, Bali" },
+                  { label: "Email", value: "dananjaya771@icloud.com" },
+                  { label: "No. HP", value: "082 337 331 331" },
                 ].map((info) => (
                   <div key={info.label} className="flex items-start gap-4 text-sm">
                     <span className="text-dark-400 w-20 shrink-0 font-medium">{info.label}</span>
-                    <span className="w-px h-4 bg-gray-300 mt-0.5" />
+                    <span className="w-px h-4 bg-gray-300 mt-0.5 shrink-0" />
                     <span className="text-dark-700">{info.value}</span>
                   </div>
                 ))}
@@ -184,7 +244,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── PENDIDIKAN & PENGALAMAN ──────────────────────────────────── */}
+      {/* ─── PENDIDIKAN & ORGANISASI ──────────────────────────────────── */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16">
@@ -198,14 +258,10 @@ export default function AboutPage() {
                   <div key={i} className="flex gap-5">
                     <div className="flex flex-col items-center">
                       <div className="w-3 h-3 rounded-full bg-gold-500 mt-1.5 shrink-0" />
-                      {i < pendidikan.length - 1 && (
-                        <div className="w-px flex-1 bg-gray-200 mt-2" />
-                      )}
+                      {i < pendidikan.length - 1 && <div className="w-px flex-1 bg-gray-200 mt-2" />}
                     </div>
                     <div className="pb-6">
-                      <p className="text-xs font-semibold tracking-widest uppercase text-gold-600 mb-1">
-                        {item.tahun}
-                      </p>
+                      <p className="text-xs font-semibold tracking-widest uppercase text-gold-600 mb-1">{item.tahun}</p>
                       <h4 className="font-serif font-bold text-dark-800 mb-0.5">{item.gelar}</h4>
                       <p className="text-sm font-medium text-dark-600 mb-1">{item.institusi}</p>
                       <p className="text-xs text-dark-400 leading-relaxed">{item.keterangan}</p>
@@ -215,24 +271,20 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Pengalaman */}
+            {/* Organisasi */}
             <div>
-              <p className="section-label">Karir & Seni</p>
-              <h2 className="section-heading mb-2">Riwayat <span className="text-gold-600 italic">Pengalaman</span></h2>
+              <p className="section-label">Pengabdian</p>
+              <h2 className="section-heading mb-2">Riwayat <span className="text-gold-600 italic">Organisasi</span></h2>
               <div className="gold-divider" />
               <div className="space-y-6 mt-8">
-                {pengalaman.map((item, i) => (
+                {organisasi.map((item, i) => (
                   <div key={i} className="flex gap-5">
                     <div className="flex flex-col items-center">
                       <div className="w-3 h-3 rounded-full bg-gold-500 mt-1.5 shrink-0" />
-                      {i < pengalaman.length - 1 && (
-                        <div className="w-px flex-1 bg-gray-200 mt-2" />
-                      )}
+                      {i < organisasi.length - 1 && <div className="w-px flex-1 bg-gray-200 mt-2" />}
                     </div>
                     <div className="pb-6">
-                      <p className="text-xs font-semibold tracking-widest uppercase text-gold-600 mb-1">
-                        {item.tahun}
-                      </p>
+                      <p className="text-xs font-semibold tracking-widest uppercase text-gold-600 mb-1">{item.tahun}</p>
                       <h4 className="font-serif font-bold text-dark-800 mb-0.5">{item.jabatan}</h4>
                       <p className="text-sm font-medium text-dark-600 mb-1">{item.institusi}</p>
                       <p className="text-xs text-dark-400 leading-relaxed">{item.keterangan}</p>
@@ -253,11 +305,9 @@ export default function AboutPage() {
             <h2 className="section-heading">Keahlian <span className="text-gold-600 italic">Hukum & Seni</span></h2>
           </div>
           <div className="grid md:grid-cols-2 gap-16">
-            {/* Hukum */}
             <div>
               <h3 className="font-serif text-xl font-bold text-dark-800 mb-6 flex items-center gap-3">
-                <span className="w-6 h-0.5 bg-gold-500" />
-                Keahlian Hukum
+                <span className="w-6 h-0.5 bg-gold-500" />Keahlian Hukum
               </h3>
               <div className="space-y-5">
                 {skillsHukum.map((skill) => (
@@ -273,11 +323,9 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-            {/* Seni */}
             <div>
               <h3 className="font-serif text-xl font-bold text-dark-800 mb-6 flex items-center gap-3">
-                <span className="w-6 h-0.5 bg-gold-500" />
-                Keahlian Seni Topeng Bali
+                <span className="w-6 h-0.5 bg-gold-500" />Keahlian Seni & Budaya Bali
               </h3>
               <div className="space-y-5">
                 {skillsSeni.map((skill) => (
@@ -297,55 +345,92 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── GALERI TOPENG (Placeholder) ──────────────────────────────── */}
+      {/* ─── PRESTASI ─────────────────────────────────────────────────── */}
       <section className="py-20 bg-dark-800">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="inline-flex items-center gap-3 text-xs font-semibold tracking-[0.2em] uppercase text-gold-400 mb-4">
-              <span className="w-8 h-px bg-gold-500" />
-              Karya Seni
-              <span className="w-8 h-px bg-gold-500" />
+              <span className="w-8 h-px bg-gold-500" />Penghargaan<span className="w-8 h-px bg-gold-500" />
             </p>
             <h2 className="section-heading-light">
-              Galeri <span className="text-gold-400 italic">Topeng Bali</span>
+              Prestasi & <span className="text-gold-400 italic">Penghargaan</span>
             </h2>
           </div>
-
-          {/* [EDIT] Ganti placeholder dengan foto karya topeng Anda
-              Simpan gambar di public/images/topeng/topeng-1.jpg, dst.
-              Contoh penggunaan:
-              <Image src="/images/topeng/topeng-1.jpg" width={400} height={300} className="object-cover" alt="..." />
-          */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {[
-              "Topeng Keras",
-              "Topeng Tua",
-              "Topeng Dalem",
-              "Topeng Bondres",
-              "Topeng Arsa Wijaya",
-              "Topeng Sidakarya",
-              "[Jenis Topeng 7]",
-              "[Jenis Topeng 8]",
-            ].map((nama, i) => (
-              <div
-                key={i}
-                className="aspect-square bg-dark-700 border border-dark-600 flex flex-col items-center justify-center gap-2 group hover:border-gold-500 transition-colors cursor-pointer"
-              >
-                <div className="text-dark-500 group-hover:text-gold-500 transition-colors">
-                  {/* Ikon topeng */}
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-xs text-dark-400 group-hover:text-gold-400 transition-colors text-center px-2">
-                  {nama}
-                </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {prestasi.map((item, i) => (
+              <div key={i} className="bg-dark-700 border border-dark-600 p-5 hover:border-gold-600 transition-colors">
+                <p className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-2">{item.tahun}</p>
+                <p className="text-sm text-gray-300 leading-relaxed">{item.label}</p>
               </div>
             ))}
           </div>
-          <p className="text-center text-dark-500 text-xs mt-6 italic">
-            * Ganti setiap kotak dengan foto karya topeng Anda
-          </p>
+        </div>
+      </section>
+
+      {/* ─── PUBLIKASI ────────────────────────────────────────────────── */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="section-label">Akademik</p>
+              <h2 className="section-heading">
+                Publikasi <span className="text-gold-600 italic">Ilmiah</span>
+              </h2>
+            </div>
+            <a
+              href="https://scholar.google.co.id/citations?hl=id&user=s5NYl5kAAAAJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-gold-600 hover:text-gold-800 transition-colors"
+            >
+              Google Scholar →
+            </a>
+          </div>
+
+          {/* Scholar stats */}
+          <div className="grid grid-cols-3 gap-4 mb-10">
+            {[
+              { label: "Total Kutipan", value: "36" },
+              { label: "H-Index", value: "3" },
+              { label: "i10-Index", value: "1" },
+            ].map((s) => (
+              <div key={s.label} className="bg-white border border-gray-100 p-5 text-center">
+                <p className="font-serif text-3xl font-bold text-gold-600 mb-1">{s.value}</p>
+                <p className="text-xs text-dark-400 tracking-wide uppercase">{s.label}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Daftar publikasi */}
+          <div className="space-y-3">
+            {publikasi.map((pub, i) => (
+              <div key={i} className="bg-white border border-gray-100 p-5 flex items-start gap-5 hover:border-gold-300 transition-colors">
+                <span className="text-xs font-semibold text-gold-600 bg-gold-50 px-2.5 py-1 rounded shrink-0 mt-0.5">
+                  {pub.tahun}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="font-serif font-bold text-dark-800 text-sm leading-snug mb-1">{pub.judul}</p>
+                  <p className="text-xs text-dark-400">{pub.penerbit}</p>
+                </div>
+                {pub.kutipan > 0 && (
+                  <span className="text-xs text-dark-400 shrink-0 bg-gray-50 px-2.5 py-1 rounded">
+                    {pub.kutipan} kutipan
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 text-center">
+            <a
+              href="https://scholar.google.co.id/citations?hl=id&user=s5NYl5kAAAAJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline-dark inline-flex"
+            >
+              Lihat Semua Publikasi →
+            </a>
+          </div>
         </div>
       </section>
 
@@ -353,13 +438,11 @@ export default function AboutPage() {
       <section className="py-20 bg-white">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="text-gold-500 text-5xl font-serif mb-6">&ldquo;</p>
-          {/* [EDIT] Ganti dengan quote favorit atau filosofi hidup Anda */}
           <blockquote className="font-serif text-2xl md:text-3xl text-dark-800 font-bold italic leading-snug mb-6">
-            [Tulis quote atau filosofi hidup Anda di sini. Bisa kutipan dari tokoh
-            hukum, filsuf Bali, atau perkataan Anda sendiri.]
+            Hukum tanpa seni adalah kering. Seni tanpa hukum adalah liar.
+            Keduanya adalah napas peradaban.
           </blockquote>
-          {/* [EDIT] Ganti dengan atribusi quote */}
-          <p className="text-sm text-dark-400 tracking-widest uppercase">— Dr. [Nama Anda]</p>
+          <p className="text-sm text-dark-400 tracking-widest uppercase">— Dr. Putu Bagus Dananjaya, S.H., M.Kn</p>
         </div>
       </section>
     </>

@@ -7,30 +7,29 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Brand */}
         <div className="md:col-span-2">
-          {/* [EDIT] Ganti nama di sini */}
           <Link href="/" className="inline-block mb-2">
             <span className="font-serif text-2xl font-bold text-white tracking-tight">
-              Dr. <span className="text-gold-500">[Nama Anda]</span>
+              Empuwritten
             </span>
           </Link>
           <p className="text-xs tracking-widest uppercase text-dark-400 mb-5">
-            Doktor Hukum · Seniman Topeng Bali
+            Law & Culture
           </p>
-          {/* [EDIT] Ganti deskripsi singkat */}
           <p className="text-sm leading-relaxed mb-6 max-w-xs">
             Menjembatani dunia hukum dan seni budaya Bali. Praktisi hukum
             sekaligus pelestari tradisi Topeng Bali yang kaya makna filosofis.
           </p>
           <div className="flex items-center gap-2">
-            {/* [EDIT] Ganti href="#" dengan URL media sosial */}
             {[
-              { label: "Instagram", char: "Ig" },
-              { label: "LinkedIn", char: "Li" },
-              { label: "YouTube", char: "Yt" },
+              { label: "Instagram", char: "Ig", href: "https://www.instagram.com/tubagusgallery" },
+              { label: "TikTok", char: "Tk", href: "https://www.tiktok.com/@tubagusgallery" },
+              { label: "Facebook", char: "Fb", href: "https://www.facebook.com/tubagus.dananjaya.9" },
             ].map((s) => (
               <a
                 key={s.label}
-                href="#"
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={s.label}
                 className="w-8 h-8 flex items-center justify-center border border-dark-600 text-[10px] font-semibold text-gray-500 hover:border-gold-500 hover:text-gold-400 transition-colors"
               >
@@ -71,18 +70,24 @@ export default function Footer() {
             Kontak
           </h4>
           <ul className="space-y-3 text-sm">
-            {/* [EDIT] Ganti dengan kontak Anda */}
             <li>
               <a
-                href="mailto:nama@email.com"
+                href="mailto:bagusdananjaya1@gmail.com"
                 className="hover:text-gold-400 transition-colors"
               >
-                nama@email.com
+                bagusdananjaya1@gmail.com
+              </a>
+            </li>
+            <li>
+              <a
+                href="tel:+6282337331331"
+                className="hover:text-gold-400 transition-colors"
+              >
+                +62 823-3733-1331
               </a>
             </li>
             <li className="text-dark-400 text-xs leading-relaxed">
-              {/* [EDIT] Ganti dengan kota/provinsi Anda */}
-              Bali, Indonesia
+              Tegallalang, Gianyar, Bali
             </li>
             <li className="pt-3">
               <Link
@@ -99,8 +104,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-dark-700">
         <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-dark-400">
-          {/* [EDIT] Ganti nama */}
-          <p>© {new Date().getFullYear()} Dr. [Nama Anda]. Hak cipta dilindungi.</p>
+          <p>© {new Date().getFullYear()} Dr. Putu Bagus Dananjaya, S.H., M.Kn. Hak cipta dilindungi.</p>
           <p>Dibangun dengan Next.js & PostgreSQL</p>
         </div>
       </div>

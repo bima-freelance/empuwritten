@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
+import ArticleCard from "@/components/blog/ArticleCard";
 
 export default async function HomePage() {
   const featuredPosts = await prisma.post.findMany({
@@ -12,12 +14,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ═══════════════════════════════════════════════════════════════
-          HERO
-          [EDIT] Ganti tagline, deskripsi, dan nama
-      ══════════════════════════════════════════════════════════════════ */}
       <section className="relative bg-hero min-h-[88vh] flex items-center overflow-hidden">
-        {/* Grid overlay */}
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -26,32 +23,21 @@ export default async function HomePage() {
             backgroundSize: "60px 60px",
           }}
         />
-        {/* [EDIT] Ganti dengan foto/gambar hero Anda di public/images/hero.jpg
-            Contoh penggunaan:
-            <Image src="/images/hero.jpg" fill className="object-cover opacity-20" alt="" />
-        */}
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-gold-500 to-transparent" />
 
         <div className="relative max-w-6xl mx-auto px-6 py-24 w-full">
           <div className="max-w-2xl">
             <p className="text-gold-400 text-xs font-semibold tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
               <span className="w-10 h-px bg-gold-500" />
-              {/* [EDIT] Ganti dengan subtitle hero Anda */}
-              Doktor Hukum · Seniman Topeng Bali
+              Law & Culture
             </p>
 
-            {/* [EDIT] Ganti dengan nama lengkap dan tagline Anda */}
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-8">
-              Empuwritten,{" "}
-              <span className="text-gold-400 italic">S.H., M.H., Ph.D.</span>
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-8xl font-bold text-white leading-[1.05] mb-8">
+              Empuwritten
             </h1>
 
-            {/* [EDIT] Ganti dengan deskripsi singkat diri Anda */}
             <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
-              Praktisi hukum dengan gelar doktor, sekaligus seniman Topeng Bali
-              yang berdedikasi pada pelestarian seni budaya leluhur. Dua dunia
-              yang saling memperkaya — ketajaman logika hukum dan kedalaman
-              filosofi seni tradisi.
+              EmpuWritten hadir untuk mengajak siapa saja mengenal Bali dari sisi yang jarang tersorot — bagaimana hukum dan kebudayaan membentuk cara hidup, nilai, dan identitas masyarakatnya. Ditulis dengan bahasa yang mudah dipahami, namun tetap berbobot.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -69,9 +55,9 @@ export default async function HomePage() {
         <div className="absolute bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10">
           <div className="max-w-6xl mx-auto px-6 py-5 grid grid-cols-3 gap-6 text-center">
             {[
-              { num: "20+", label: "Tahun Pengalaman Hukum" },
-              { num: "500+", label: "Karya Topeng Bali" },
-              { num: "50+", label: "Publikasi & Tulisan" },
+              { num: "36", label: "Dikutip Akademik" },
+              { num: "13+", label: "Publikasi Ilmiah" },
+              { num: "9", label: "Prestasi & Penghargaan" },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="text-gold-400 font-serif text-2xl font-bold">{stat.num}</p>
@@ -91,22 +77,15 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Image — [EDIT] Ganti placeholder dengan foto Anda */}
             <div className="relative">
-              <div className="aspect-[4/5] bg-dark-100 overflow-hidden">
-                {/*
-                  [EDIT] Hapus div placeholder di bawah, ganti dengan:
-                  <Image
-                    src="/images/foto-profil.jpg"
-                    fill
-                    className="object-cover"
-                    alt="Dr. [Nama Anda]"
-                  />
-                */}
-                <div className="w-full h-full bg-gradient-to-br from-dark-700 to-dark-900 flex flex-col items-center justify-center gap-3 text-white/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  <p className="text-xs tracking-widest uppercase">Foto Profil</p>
-                </div>
+              <div className="aspect-[4/5] bg-dark-100 overflow-hidden relative">
+                <Image
+                  src="/images/profile.png"
+                  fill
+                  className="object-cover object-top"
+                  alt="Profil"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
               </div>
               {/* Gold accent */}
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gold-600 -z-10" />
@@ -125,31 +104,30 @@ export default async function HomePage() {
               <p className="section-label">Tentang Saya</p>
               {/* [EDIT] Ganti nama dan gelar */}
               <h2 className="section-heading mb-5">
-                Antara Meja Persidangan dan{" "}
-                <span className="text-gold-600 italic">Panggung Topeng</span>
+                Antara Dunia Akademisi dan{" "}
+                <span className="text-gold-600 italic">Panggung Kesenian</span>
               </h2>
               <div className="gold-divider" />
 
               {/* [EDIT] Ganti dengan bio Anda */}
               <p className="text-dark-500 leading-relaxed mb-4">
-                Saya adalah seorang Doktor Hukum yang mendalami [bidang hukum
-                spesialisasi Anda, misal: hukum adat, hukum internasional, dll],
-                sekaligus seniman Topeng Bali yang telah menekuni tradisi ini
-                selama lebih dari [X] tahun.
+                Saya adalah seorang Doktor Hukum yang mendalami hukum perdata terkhusus hukum perjanjian (Contract Law Expert),
+                sekaligus seniman Topeng Bali dan Calonarang yang telah menekuni tradisi ini
+                selama lebih dari 23 tahun.
               </p>
               <p className="text-dark-500 leading-relaxed mb-8">
                 Dua dunia yang sering dianggap berseberangan ini justru saling
                 melengkapi dalam perjalanan hidup saya. Hukum mengajarkan
-                ketegasan dan keadilan; Topeng Bali mengajarkan kelenturan dan
+                ketegasan dan keadilan. Topeng Bali mengajarkan kelenturan dan
                 kedalaman jiwa.
               </p>
 
               {/* [EDIT] Ganti dengan pencapaian utama Anda */}
               <ul className="space-y-3 mb-10">
                 {[
-                  "Doktor Hukum — [Nama Universitas], [Tahun]",
-                  "Seniman Topeng Bali — Murid [Nama Guru/Padepokan]",
-                  "[Jabatan/Profesi Saat Ini], [Institusi]",
+                  "Doktor Hukum — Universitas Tarumanagara, 2026",
+                  "Seniman Topeng Bali — Sanggar Pagrahān Lor Kusara, 2012",
+                  "Dosen Hukum, Universitas Mahasaraswati Denpasar, 2022 - sekarang",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm text-dark-600">
                     <span className="w-5 h-px bg-gold-500 shrink-0 mt-2.5" />
@@ -196,16 +174,15 @@ export default async function HomePage() {
               <h3 className="font-serif text-2xl font-bold text-white mb-4">Doktor Hukum</h3>
               {/* [EDIT] Ganti dengan deskripsi praktik hukum Anda */}
               <p className="text-dark-300 leading-relaxed mb-6">
-                Dengan gelar doktor di bidang hukum, saya mendedikasikan diri
-                pada [spesialisasi hukum Anda]. Mengajar, meneliti, dan
-                berpraktik dengan landasan akademis yang kuat.
+                Dosen Fakultas Hukum Universitas Mahasaraswati Denpasar. Menekuni
+                hukum kontrak, kenotariatan, dan hukum perdata dengan 13+ publikasi
+                ilmiah dan 36 kutipan akademik.
               </p>
-              {/* [EDIT] Ganti dengan keahlian hukum Anda */}
               <ul className="space-y-2 text-sm text-dark-300">
                 {[
-                  "[Bidang Hukum 1, misal: Hukum Adat Bali]",
-                  "[Bidang Hukum 2, misal: Hukum Keluarga]",
-                  "[Bidang Hukum 3, misal: Hukum Budaya & Kekayaan Intelektual]",
+                  "Hukum Kontrak (Contract Law)",
+                  "Hukum Kenotariatan (Notary Law)",
+                  "Hukum Perdata & Filsafat Hukum",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <span className="text-gold-500 mt-1">—</span>
@@ -226,16 +203,15 @@ export default async function HomePage() {
               <h3 className="font-serif text-2xl font-bold text-white mb-4">Seniman Topeng Bali</h3>
               {/* [EDIT] Ganti dengan deskripsi seni Topeng Bali Anda */}
               <p className="text-dark-300 leading-relaxed mb-6">
-                Topeng Bali bukan sekadar tarian — ia adalah ritual, filosofi,
-                dan warisan leluhur yang saya emban dengan penuh tanggung jawab.
-                [Ceritakan perjalanan Anda dalam seni Topeng Bali.]
+                Seniman Topeng Bali dari Sanggar Pagrahān Lor Kusara sejak 2012.
+                Juara 2 Lomba Topeng Pengerawos Se-Bali di ISI Bali, serta aktif
+                pentas dan melestarikan tradisi leluhur.
               </p>
-              {/* [EDIT] Ganti dengan keahlian seni Anda */}
               <ul className="space-y-2 text-sm text-dark-300">
                 {[
-                  "[Jenis Topeng 1, misal: Topeng Keras / Topeng Tua]",
-                  "[Jenis Topeng 2, misal: Topeng Dalem]",
-                  "[Keahlian lain, misal: Ukiran Topeng]",
+                  "Topeng Bali",
+                  "Calonarang",
+                  "Mewirama & Mekidung",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <span className="text-gold-500 mt-1">—</span>
@@ -252,22 +228,22 @@ export default async function HomePage() {
               {
                 icon: "✦",
                 title: "Akademisi",
-                desc: "Mengajar dan meneliti di [Nama Institusi]. [Mata kuliah/bidang penelitian Anda].",
+                desc: "Dosen Fakultas Hukum Universitas Mahasaraswati Denpasar. Mengampu mata kuliah hukum kontrak, kenotariatan, dan hukum perdata.",
               },
               {
                 icon: "◈",
                 title: "Praktisi Hukum",
-                desc: "[Jabatan/posisi Anda saat ini]. Pengalaman menangani kasus [jenis kasus].",
+                desc: "Court Monitoring KPK Provinsi Bali. Aktif dalam organisasi hukum nasional dan advokasi penegakan hukum pemilu.",
               },
               {
                 icon: "❧",
                 title: "Pelestari Budaya",
-                desc: "Aktif dalam pelestarian seni Topeng Bali melalui pertunjukan, workshop, dan dokumentasi.",
+                desc: "Aktif dalam pelestarian seni Topeng Bali dan Mewirama. Wakil Ketua Pasikian Yowana Provinsi Bali 2025–2030.",
               },
               {
                 icon: "⟡",
                 title: "Penulis & Peneliti",
-                desc: "Penulis [X] buku dan [X] jurnal ilmiah di bidang hukum dan seni budaya Bali.",
+                desc: "Penulis 3+ buku hukum dan 10+ jurnal ilmiah. 36 kutipan akademik di Google Scholar.",
               },
             ].map((item) => (
               <div key={item.title} className="bg-dark-800 p-7 hover:bg-dark-700 transition-colors">
@@ -311,43 +287,9 @@ export default async function HomePage() {
               </p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-3 gap-0 border border-gray-200">
-              {featuredPosts.map((post, i) => (
-                <article
-                  key={post.id}
-                  className={`p-8 bg-white hover:bg-gold-50 transition-colors group ${
-                    i < featuredPosts.length - 1 ? "border-r border-gray-200" : ""
-                  }`}
-                >
-                  {post.tags.length > 0 && (
-                    <p className="text-xs font-semibold tracking-widest uppercase text-gold-600 mb-4">
-                      {post.tags[0].name}
-                    </p>
-                  )}
-                  <Link href={`/blog/${post.slug}`}>
-                    <h3 className="font-serif text-xl font-bold text-dark-800 group-hover:text-gold-700 transition-colors leading-snug mb-4">
-                      {post.title}
-                    </h3>
-                  </Link>
-                  {post.excerpt && (
-                    <p className="text-dark-500 text-sm leading-relaxed mb-6 line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                  )}
-                  <div className="flex items-center justify-between">
-                    {post.publishedAt && (
-                      <time className="text-xs text-dark-400">
-                        {formatDate(post.publishedAt)}
-                      </time>
-                    )}
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="text-xs font-semibold tracking-wide uppercase text-gold-600 hover:text-gold-800 transition-colors"
-                    >
-                      Baca →
-                    </Link>
-                  </div>
-                </article>
+            <div className="grid md:grid-cols-3 gap-6">
+              {featuredPosts.map((post) => (
+                <ArticleCard key={post.id} post={post} />
               ))}
             </div>
           )}

@@ -1,22 +1,29 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/admin/login");
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") ?? "";
 
+  // Halaman login: render tanpa sidebar (tidak ada auth check di sini,
+  // middleware sudah handle redirect)
+  if (pathname === "/admin/login" || pathname === "") {
+    return <>{children}</>;
+  }
+
+  // Semua halaman admin lainnya: render dengan sidebar
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
       <aside className="w-56 bg-white border-r border-gray-100 flex flex-col">
         <div className="p-6 border-b border-gray-100">
-          <Link href="/" className="font-serif text-lg font-bold text-gray-900 hover:text-brand-600 transition-colors">
+          <Link
+            href="/"
+            className="font-serif text-lg font-bold text-gray-900 hover:text-brand-600 transition-colors"
+          >
             Empuwritten
           </Link>
           <p className="text-xs text-gray-400 mt-1">Admin Panel</p>
@@ -46,7 +53,6 @@ export default async function AdminLayout({
         </div>
       </aside>
 
-      {/* Content */}
       <main className="flex-1 overflow-auto">
         <div className="p-8">{children}</div>
       </main>
