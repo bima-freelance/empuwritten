@@ -168,7 +168,7 @@ export default function ContactPage() {
                     },
                     {
                       label: "Telepon",
-                      value: "+6282-337-331-331",
+                      value: "+6282-337-331-****",
                       href: "tel:+6282337331331",
                     },
                     {

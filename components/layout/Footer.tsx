@@ -83,7 +83,7 @@ export default function Footer() {
                 href="tel:+6282337331331"
                 className="hover:text-gold-400 transition-colors"
               >
-                +62 823-3733-1331
+                +62 823-3733-****
               </a>
             </li>
             <li className="text-dark-400 text-xs leading-relaxed">

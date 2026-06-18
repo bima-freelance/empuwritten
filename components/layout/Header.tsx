@@ -20,7 +20,7 @@ export default function Header() {
               href="tel:+6282337331331"
               className="hidden sm:inline hover:text-gold-400 transition-colors"
             >
-              +62 823-3733-1331
+              +62 823-3733-****
             </a>
           </div>
           <div className="hidden sm:flex items-center gap-1">

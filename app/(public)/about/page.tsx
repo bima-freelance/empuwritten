@@ -225,7 +225,7 @@ export default function AboutPage() {
                   { label: "Profesi", value: "Dosen FH Unmas Denpasar · Seniman Topeng Bali" },
                   { label: "Lokasi", value: "Tegallalang, Gianyar, Bali" },
                   { label: "Email", value: "dananjaya771@icloud.com" },
-                  { label: "No. HP", value: "082 337 331 331" },
+                  { label: "No. HP", value: "082 337 331 ****" },
                 ].map((info) => (
                   <div key={info.label} className="flex items-start gap-4 text-sm">
                     <span className="text-dark-400 w-20 shrink-0 font-medium">{info.label}</span>
