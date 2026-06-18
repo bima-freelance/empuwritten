@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import ArticleCard from "@/components/blog/ArticleCard";
 
+export const revalidate = 0; // selalu fetch data terbaru
+
 export default async function HomePage() {
   const featuredPosts = await prisma.post.findMany({
     where: { published: true },
