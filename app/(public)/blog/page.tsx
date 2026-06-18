@@ -119,7 +119,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                       : "bg-white border border-gray-200 text-dark-500 hover:border-blue-400 hover:text-blue-600"
                   }`}
                 >
-                  ⚖️ Hukum
+                  Hukum
                 </Link>
                 <Link
                   href={buildUrl({ category: "CULTURE", page: undefined })}
@@ -129,24 +129,24 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                       : "bg-white border border-gray-200 text-dark-500 hover:border-amber-400 hover:text-amber-600"
                   }`}
                 >
-                  🎭 Budaya
+                  Budaya
                 </Link>
               </div>
             </div>
 
             {/* Tag Filter */}
             {allTags.length > 0 && (
-              <div className="flex items-center gap-3 flex-wrap">
-                <span className="text-xs font-semibold tracking-widest uppercase text-dark-400">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-[9px] md:text-[10px] font-semibold tracking-widest uppercase text-dark-400">
                   Tag
                 </span>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1">
                   <Link
                     href={buildUrl({ tag: undefined, page: undefined })}
-                    className={`text-xs font-semibold tracking-widest uppercase px-4 py-2 transition-colors ${
+                    className={`text-[9px] md:text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 md:px-2.5 md:py-1 transition-colors ${
                       !currentTag
                         ? "bg-gold-600 text-white"
-                        : "bg-white border border-gray-200 text-dark-500 hover:border-gold-400 hover:text-gold-600"
+                        : "bg-white border border-gray-200 text-dark-400 hover:border-gold-400 hover:text-gold-600"
                     }`}
                   >
                     Semua
@@ -155,10 +155,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     <Link
                       key={tag.id}
                       href={buildUrl({ tag: tag.name, page: undefined })}
-                      className={`text-xs font-semibold tracking-widest uppercase px-4 py-2 transition-colors ${
+                      className={`text-[9px] md:text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 md:px-2.5 md:py-1 transition-colors ${
                         currentTag === tag.name
                           ? "bg-gold-600 text-white"
-                          : "bg-white border border-gray-200 text-dark-500 hover:border-gold-400 hover:text-gold-600"
+                          : "bg-white border border-gray-200 text-dark-400 hover:border-gold-400 hover:text-gold-600"
                       }`}
                     >
                       {tag.name}
