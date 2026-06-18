@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -20,20 +18,27 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Format file tidak didukung" }, { status: 400 });
   }
 
-  const maxSize = 5 * 1024 * 1024; // 5MB
+  const maxSize = 5 * 1024 * 1024;
   if (file.size > maxSize) {
     return NextResponse.json({ error: "Ukuran file maksimal 5MB" }, { status: 400 });
   }
 
   const ext = file.name.split(".").pop();
   const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+
+  // Production: pakai Vercel Blob
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    const { put } = await import("@vercel/blob");
+    const blob = await put(`uploads/${filename}`, file, { access: "public" });
+    return NextResponse.json({ url: blob.url });
+  }
+
+  // Development: simpan ke /public/uploads
+  const { writeFile, mkdir } = await import("fs/promises");
+  const path = await import("path");
   const uploadDir = path.join(process.cwd(), "public", "uploads");
-
   await mkdir(uploadDir, { recursive: true });
-
   const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-  await writeFile(path.join(uploadDir, filename), buffer);
-
+  await writeFile(path.join(uploadDir, filename), Buffer.from(bytes));
   return NextResponse.json({ url: `/uploads/${filename}` });
 }
