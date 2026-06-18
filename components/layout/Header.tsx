@@ -9,27 +9,31 @@ export default function Header() {
       <div className="bg-dark-900 text-gray-400 text-xs">
         <div className="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            {/* [EDIT] Ganti dengan email Anda */}
             <a
-              href="mailto:nama@email.com"
+              href="mailto:bagusdananjaya1@gmail.com"
               className="hover:text-gold-400 transition-colors"
             >
-              nama@email.com
+              bagusdananjaya1@gmail.com
             </a>
-            {/* [EDIT] Ganti dengan nomor telepon Anda — atau hapus baris ini */}
             <span className="hidden sm:inline text-dark-600">|</span>
-            <span className="hidden sm:inline">+62 812-XXXX-XXXX</span>
+            <a
+              href="tel:+6282337331331"
+              className="hidden sm:inline hover:text-gold-400 transition-colors"
+            >
+              +62 823-3733-1331
+            </a>
           </div>
           <div className="hidden sm:flex items-center gap-1">
-            {/* [EDIT] Ganti href="#" dengan URL media sosial Anda */}
             {[
-              { label: "Instagram", char: "Ig" },
-              { label: "LinkedIn", char: "Li" },
-              { label: "YouTube", char: "Yt" },
+              { label: "Instagram", char: "Ig", href: "https://www.instagram.com/tubagusgallery" },
+              { label: "TikTok", char: "Tk", href: "https://www.tiktok.com/@tubagusgallery" },
+              { label: "Facebook", char: "Fb", href: "https://www.facebook.com/tubagus.dananjaya.9" },
             ].map((s) => (
               <a
                 key={s.label}
-                href="#"
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-7 h-7 flex items-center justify-center rounded hover:bg-dark-700 hover:text-gold-400 transition-colors text-[10px] font-semibold"
                 aria-label={s.label}
               >
